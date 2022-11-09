@@ -15,7 +15,7 @@ class _OnetextoneState extends State<Onetextone> {
     return Container(
       width:double.infinity,
       height:25,
-      color:Colors.blue,
+      color:Colors.white,
       child:Text("Cauca Per Jam",style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16))
     );
   }

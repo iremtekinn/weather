@@ -22,19 +22,30 @@ class _OpinkkState extends State<Opinkk> {
         )
       ),
       child:Row(
-        
         children: [
-          Image.asset("assets/pbulut.png"),
-          SizedBox(width:10),
-         Column(
-           children: [
-             Text("Cuca esok hari kemungkinan "),
-             Text("akan terjadi hujan di siang hari"),
-             SizedBox(height: 10,),
-             Text("Jangan lupa bawa payung ya")
-           ],
-         ),
-         
+          Padding(padding: EdgeInsets.only(top:6,left:24),
+          child:Image.asset("assets/pbulut.png"),
+          
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+Padding(
+                  padding: const EdgeInsets.only(top: 15,left: 15),
+                  child: Container(
+                    width: 186,
+                    height: 34,
+                    child: Text("Cuaca esok hari kemıngkinan akan terjadi hujann di siang hari",style: TextStyle(color: Color(0xff201C1C),fontSize: 14,fontWeight: FontWeight.w600),)),
+                ),
+                 Padding(
+                    padding: const EdgeInsets.only(top: 6,left: 15),
+                    child: Container(
+                    width: 158,
+                    height: 16,
+                    child: Text("Jangan lupa bawa payung ya",style: TextStyle(color: Color(0xff201C1C),fontSize: 13,fontWeight: FontWeight.w400))),
+                  ),
+            ],
+          )
         ],
       )
     );

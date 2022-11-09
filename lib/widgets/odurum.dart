@@ -32,7 +32,8 @@ class _OdurumState extends State<Odurum> {
         Positioned(
           top:20,
           left:22,
-          child: Text("Senin 20 Desember 2021",style:TextStyle(color:Colors.white))
+          child: Text("Senin 20 Desember 2021",style:TextStyle(color:Colors.white)),
+          
           ),
           Positioned(
           top:20,

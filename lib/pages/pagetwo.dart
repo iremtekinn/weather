@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:weather_app/widgets/appbarone.dart';
-import 'package:weather_app/widgets/odurum.dart';
 import 'package:weather_app/widgets/olistone.dart';
-import 'package:weather_app/widgets/olisttwo.dart';
 import 'package:weather_app/widgets/onetextone.dart';
-import 'package:weather_app/widgets/opinkk.dart';
-import 'package:weather_app/widgets/otexttwo.dart';
+import 'package:weather_app/widgets/tdurum.dart';
+import 'package:weather_app/widgets/tgrid.dart';
+import 'package:weather_app/widgets/tinformasi.dart';
+import 'package:weather_app/widgets/twotextone.dart';
 
-class Pageone extends StatefulWidget {
-  const Pageone({super.key});
+class Pagetwo extends StatefulWidget {
+  const Pagetwo({super.key});
 
   @override
-  State<Pageone> createState() => _PageoneState();
+  State<Pagetwo> createState() => _PagetwoState();
 }
 
-class _PageoneState extends State<Pageone> {
+class _PagetwoState extends State<Pagetwo> {
   List<String>hava=[
      "assets/o1.png",
      "assets/o2.png",
@@ -96,67 +95,73 @@ class _PageoneState extends State<Pageone> {
     "11.00 PM"
     
   ];
-  List<String>ohavalar=[
-    "assets/o4.png",
-    "assets/o5.png",
-    "assets/o6.png",
+  List<String>timgler=[
+    "assets/t2.png",
+    "assets/t3.png",
+    "assets/t4.png",
+    "assets/t5.png",
   ];
-  List<String>osehirler=[
-    "Selasa",
-    "Rabu",
-    "Kamis",
+  List<String>tmetinler=[
+    "86%",
+    "1 km/h",
+    "940hPa",
+    "14%"
   ];
-  List<String>osehir2ler=[
-    "Hujan petir",
-    "Hujan deras",
-    "Hujan deras"
-  ];
-  List<String>odereceler=[
-    "19",
-    "17",
-    "17"
+  List<String>tmetinler2=[
+    "Kelembaban",
+    "Kecepatan Angin",
+    "Tekanan Udara",
+    "Kabut"
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
-      body:SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(right:10, left:10),
-          child:Column(
-            children: [
-              Appbarone(),
-              SizedBox(height: 20,),
-              Odurum(),
-              SizedBox(height:10),
-              Onetextone(),
-              SizedBox(height:10),
-              Container(
-                color:Colors.green,
+      body: SingleChildScrollView(
+        
+        child:Column(
+          children: [
+            Tdurum(),
+            SizedBox(height:20),
+            Padding(
+              padding: EdgeInsets.only(left:10),
+              child: Onetextone()
+              ),
+            SizedBox(height:10),
+            Container(
+                color:Colors.white,
                 height:120,
                 child:ListView.builder(itemCount:hava.length,
                 scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
-                  return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index],);
+                  return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index]);
                 },
                 )
               ),
               SizedBox(height:10),
-              Otexttwo(),
+              Twotextone(),
               SizedBox(height:10),
-              Opinkk(),
+              Tinformasi(),
               SizedBox(height:10),
-              Container(
-                color:Colors.green,
-                height:200,
-                child:ListView.builder(itemCount:ohavalar.length,
-                scrollDirection: Axis.vertical, itemBuilder: (context, index) {
-                  return Olisttwo(ohava: ohavalar[index], osehir: osehirler[index], osehir2: osehir2ler[index], oderece: odereceler[index]);
-                },)
-              )
-            ],
-          )
-          ),
-      )
+              //  Container(
+              //    width:double.infinity,
+              //   // height:100,
+              //   color:Colors.blue,
+              //    child: GridView.builder(
+              //      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //      crossAxisCount: 2,
+              //      mainAxisSpacing: 10,
+              //      crossAxisSpacing: 10,
+              //      ) ,
+              //    itemCount:timgler.length,
+              //    itemBuilder: ((context, index) {
+              //      return Tgrid(timg: timgler[index], tmetin: tmetinler[index], tmetin2: tmetinler2[index]);
+              //    }),
+              //    ),
+              //  )
+              
+          ],
+        )
+        
+      ),
     );
   }
 }
