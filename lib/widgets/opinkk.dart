@@ -17,6 +17,8 @@ class _OpinkkState extends State<Opinkk> {
       height:86,
       //color:Colors.yellow,
       decoration: BoxDecoration(
+        //color:Color(0xffFBFBFB),
+
         image:DecorationImage(image: AssetImage("assets/opink.png"),
         fit:BoxFit.cover
         )

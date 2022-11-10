@@ -6,6 +6,7 @@ import 'package:weather_app/widgets/onetextone.dart';
 import 'package:weather_app/widgets/tdurum.dart';
 import 'package:weather_app/widgets/tgrid.dart';
 import 'package:weather_app/widgets/tinformasi.dart';
+import 'package:weather_app/widgets/tinformasi2.dart';
 import 'package:weather_app/widgets/twotextone.dart';
 
 class Pagetwo extends StatefulWidget {
@@ -103,15 +104,17 @@ class _PagetwoState extends State<Pagetwo> {
   ];
   List<String>tmetinler=[
     "86%",
-    "1 km/h",
     "940hPa",
+    "1 km/h",
     "14%"
+    
   ];
   List<String>tmetinler2=[
     "Kelembaban",
-    "Kecepatan Angin",
     "Tekanan Udara",
+    "Kecepatan Angin",
     "Kabut"
+    
   ];
   @override
   Widget build(BuildContext context) {
@@ -128,7 +131,7 @@ class _PagetwoState extends State<Pagetwo> {
               ),
             SizedBox(height:10),
             Container(
-                color:Colors.white,
+                color:Color(0xffFBFBFB),
                 height:120,
                 child:ListView.builder(itemCount:hava.length,
                 scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
@@ -139,24 +142,27 @@ class _PagetwoState extends State<Pagetwo> {
               SizedBox(height:10),
               Twotextone(),
               SizedBox(height:10),
-              Tinformasi(),
+              Tinformasi2(),
               SizedBox(height:10),
-              //  Container(
-              //    width:double.infinity,
-              //   // height:100,
-              //   color:Colors.blue,
-              //    child: GridView.builder(
-              //      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //      crossAxisCount: 2,
-              //      mainAxisSpacing: 10,
-              //      crossAxisSpacing: 10,
-              //      ) ,
-              //    itemCount:timgler.length,
-              //    itemBuilder: ((context, index) {
-              //      return Tgrid(timg: timgler[index], tmetin: tmetinler[index], tmetin2: tmetinler2[index]);
-              //    }),
-              //    ),
-              //  )
+               Container(
+                 width:343,
+                 height:154,
+                color:Colors.white,
+                 child: GridView.builder(
+                
+                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                   crossAxisCount: 2,
+                   mainAxisSpacing: 5,
+                   crossAxisSpacing: 5,
+                   childAspectRatio: 7/2,
+                   
+                   ) ,
+                 itemCount:timgler.length,
+                 itemBuilder: ((context, index) {
+                   return Tgrid(timg: timgler[index], tmetin: tmetinler[index], tmetin2: tmetinler2[index]);
+                 }),
+                 ),
+               )
               
           ],
         )

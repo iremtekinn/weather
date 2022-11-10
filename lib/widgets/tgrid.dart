@@ -16,17 +16,25 @@ class _TgridState extends State<Tgrid> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:100,
-      height:100,
-      color:Colors.yellow,
+      decoration: BoxDecoration(
+        color:Color(0xffFBFBFB),
+        borderRadius: BorderRadius.circular(10)
+      ),
+      width:164,
+      height:69,
+      
       child: Row(
         children: [
         Image.asset(widget.timg),
-        Column(
-          children: [
-            Text(widget.tmetin),
-            Text(widget.tmetin2)
-          ],
+        Padding(
+          padding:EdgeInsets.only(top:10,left:15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.tmetin,style:TextStyle(fontWeight: FontWeight.bold)),
+              Text(widget.tmetin2,style:TextStyle(fontSize: 12))
+            ],
+          ),
         )
         ],
       ),

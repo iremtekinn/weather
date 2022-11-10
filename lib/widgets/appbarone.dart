@@ -20,7 +20,7 @@ class _AppbaroneState extends State<Appbarone> {
       margin:EdgeInsets.only(top:40),
       width:double.infinity,
       height:45,
-      color:Colors.blue,
+      color:Colors.white,
       child:Row(
         children: [
           Image.asset("assets/olocation.png"),

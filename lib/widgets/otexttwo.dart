@@ -15,7 +15,7 @@ class _OtexttwoState extends State<Otexttwo> {
     return Container(
       width:double.infinity,
       height:20,
-      color:Colors.blue,
+      color:Colors.white,
       child:Text("Harian", style:TextStyle(fontSize: 16,fontWeight: FontWeight.w500))
     );
   }

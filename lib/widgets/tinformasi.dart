@@ -13,7 +13,7 @@ class _TinformasiState extends State<Tinformasi> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:343,
+      width:300,
       height:100,
       color:Colors.white,
       child:Row(

@@ -132,7 +132,7 @@ class _PageoneState extends State<Pageone> {
               Onetextone(),
               SizedBox(height:10),
               Container(
-                color:Colors.green,
+                color:Color(0xffFBFBFB),
                 height:120,
                 child:ListView.builder(itemCount:hava.length,
                 scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
@@ -146,7 +146,7 @@ class _PageoneState extends State<Pageone> {
               Opinkk(),
               SizedBox(height:10),
               Container(
-                color:Colors.green,
+                color:Color(0xffFBFBFB),
                 height:200,
                 child:ListView.builder(itemCount:ohavalar.length,
                 scrollDirection: Axis.vertical, itemBuilder: (context, index) {

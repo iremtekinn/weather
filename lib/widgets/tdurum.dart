@@ -35,7 +35,9 @@ class _TdurumState extends State<Tdurum> {
             left:20,
             child: Row(
               children: [
-                Icon(Icons.chevron_left,color:Colors.white),
+                GestureDetector(
+                  onTap:(() => Navigator.pop(context)),
+                  child: Icon(Icons.chevron_left,color:Colors.white)),
                 SizedBox(width:80),
                 Text("Tanjungsiang, Subang",style: TextStyle(color:Colors.white),),
                 SizedBox(width:80),

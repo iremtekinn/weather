@@ -23,7 +23,7 @@ class _OdropdownState extends State<Odropdown> {
     return Container(
       width:190,
       height: 40,
-      color: Colors.yellow,
+      color: Colors.white,
       child:DropdownButton(
         value: dropdownvalue,
         icon: const Icon(Icons.keyboard_arrow_down),   
