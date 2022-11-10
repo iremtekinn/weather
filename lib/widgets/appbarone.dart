@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:weather_app/widgets/odropdown.dart';
+//import 'package:weather_app/widgets/show.dart';
 
 class Appbarone extends StatefulWidget {
   const Appbarone({super.key});
@@ -13,8 +14,13 @@ class Appbarone extends StatefulWidget {
 }
 
 class _AppbaroneState extends State<Appbarone> {
+  
+  
+  
+
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       padding:EdgeInsets.only(left:5),
       margin:EdgeInsets.only(top:40),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+//import 'package:weather_app/widgets/show.dart';
 
 class Onetextone extends StatefulWidget {
   const Onetextone({super.key});
@@ -10,8 +11,10 @@ class Onetextone extends StatefulWidget {
 }
 
 class _OnetextoneState extends State<Onetextone> {
+  
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       width:double.infinity,
       height:25,

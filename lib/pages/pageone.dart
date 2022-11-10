@@ -1,6 +1,8 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+//import 'package:showcaseview/showcaseview.dart';
 import 'package:weather_app/widgets/appbarone.dart';
 import 'package:weather_app/widgets/odurum.dart';
 import 'package:weather_app/widgets/olistone.dart';
@@ -116,6 +118,10 @@ class _PageoneState extends State<Pageone> {
     "17",
     "17"
   ];
+
+  
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,33 +131,51 @@ class _PageoneState extends State<Pageone> {
           padding: EdgeInsets.only(right:10, left:10),
           child:Column(
             children: [
-              Appbarone(),
+              BounceInLeft(
+                child: Appbarone(),
+                duration: Duration(seconds:5),
+                ),
               SizedBox(height: 20,),
-              Odurum(),
+              Bounce(child: Odurum()),
               SizedBox(height:10),
-              Onetextone(),
-              SizedBox(height:10),
-              Container(
-                color:Color(0xffFBFBFB),
-                height:120,
-                child:ListView.builder(itemCount:hava.length,
-                scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
-                  return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index],);
-                },
-                )
+              BounceInLeft(
+                child: Onetextone(),
+                duration:Duration(seconds:5)
               ),
               SizedBox(height:10),
-              Otexttwo(),
+              BounceInRight(
+                duration: Duration(seconds:5),
+                child: Container(
+                  color:Color(0xffFBFBFB),
+                  height:120,
+                  child:ListView.builder(itemCount:hava.length,
+                  scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
+                    return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index],);
+                  },
+                  )
+                  
+                ),
+              ),
               SizedBox(height:10),
-              Opinkk(),
+              BounceInLeft(
+                duration: Duration(seconds: 5),
+                child: Otexttwo()
+                ),
               SizedBox(height:10),
-              Container(
-                color:Color(0xffFBFBFB),
-                height:200,
-                child:ListView.builder(itemCount:ohavalar.length,
-                scrollDirection: Axis.vertical, itemBuilder: (context, index) {
-                  return Olisttwo(ohava: ohavalar[index], osehir: osehirler[index], osehir2: osehir2ler[index], oderece: odereceler[index]);
-                },)
+              BounceInRight(
+                duration: Duration(seconds: 5),
+                child: Opinkk()
+                ),
+              SizedBox(height:10),
+              Bounce(
+                child: Container(
+                  color:Color(0xffFBFBFB),
+                  height:200,
+                  child:ListView.builder(itemCount:ohavalar.length,
+                  scrollDirection: Axis.vertical, itemBuilder: (context, index) {
+                    return Olisttwo(ohava: ohavalar[index], osehir: osehirler[index], osehir2: osehir2ler[index], oderece: odereceler[index]);
+                  },)
+                ),
               )
             ],
           )

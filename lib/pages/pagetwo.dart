@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -123,44 +124,52 @@ class _PagetwoState extends State<Pagetwo> {
         
         child:Column(
           children: [
-            Tdurum(),
+            FadeIn(child: Tdurum(),duration: Duration(seconds: 5),),
             SizedBox(height:20),
-            Padding(
-              padding: EdgeInsets.only(left:10),
-              child: Onetextone()
-              ),
+            FadeIn(
+              duration: Duration(seconds: 5),
+              child: Padding(
+                padding: EdgeInsets.only(left:10),
+                child: Onetextone()
+                ),
+            ),
             SizedBox(height:10),
-            Container(
-                color:Color(0xffFBFBFB),
-                height:120,
-                child:ListView.builder(itemCount:hava.length,
-                scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
-                  return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index]);
-                },
-                )
-              ),
+            FadeInRight(
+              duration: Duration(seconds: 5),
+              child: Container(
+                  color:Color(0xffFBFBFB),
+                  height:120,
+                  child:ListView.builder(itemCount:hava.length,
+                  scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
+                    return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index]);
+                  },
+                  )
+                ),
+            ),
               SizedBox(height:10),
-              Twotextone(),
+              FadeIn(duration: Duration(seconds: 5),child: Twotextone()),
               SizedBox(height:10),
-              Tinformasi2(),
+              Bounce(child: Tinformasi2()),
               SizedBox(height:10),
-               Container(
-                 width:343,
-                 height:154,
-                color:Colors.white,
-                 child: GridView.builder(
-                
-                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                   crossAxisCount: 2,
-                   mainAxisSpacing: 5,
-                   crossAxisSpacing: 5,
-                   childAspectRatio: 7/2,
-                   
-                   ) ,
-                 itemCount:timgler.length,
-                 itemBuilder: ((context, index) {
-                   return Tgrid(timg: timgler[index], tmetin: tmetinler[index], tmetin2: tmetinler2[index]);
-                 }),
+               SlideInUp(
+                 child: Container(
+                   width:343,
+                   height:154,
+                  color:Colors.white,
+                   child: GridView.builder(
+                  
+                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                     crossAxisCount: 2,
+                     mainAxisSpacing: 5,
+                     crossAxisSpacing: 5,
+                     childAspectRatio: 7/2,
+                     
+                     ) ,
+                   itemCount:timgler.length,
+                   itemBuilder: ((context, index) {
+                     return Tgrid(timg: timgler[index], tmetin: tmetinler[index], tmetin2: tmetinler2[index]);
+                   }),
+                   ),
                  ),
                )
               
