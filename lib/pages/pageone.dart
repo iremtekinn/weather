@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:showcaseview/showcaseview.dart';
 //import 'package:showcaseview/showcaseview.dart';
 import 'package:weather_app/widgets/appbarone.dart';
 import 'package:weather_app/widgets/odurum.dart';
@@ -119,7 +120,22 @@ class _PageoneState extends State<Pageone> {
     "17"
   ];
 
-  
+  final _key1=GlobalKey();
+  final _key2=GlobalKey();
+
+void initState() {
+  super.initState();
+  WidgetsBinding.instance!.addPostFrameCallback(
+    (_) => ShowCaseWidget.of(context)!.startShowCase(
+      [
+        _key1,
+        _key2,
+        
+        
+      ],
+    ),
+  );
+}
 
   
   @override
@@ -136,7 +152,12 @@ class _PageoneState extends State<Pageone> {
                 duration: Duration(seconds:5),
                 ),
               SizedBox(height: 20,),
-              Bounce(child: Odurum()),
+              Bounce(child: Showcase(
+                key: _key1,
+                description: 'You can check the weather in here',
+                child: Odurum()
+                )
+                ),
               SizedBox(height:10),
               BounceInLeft(
                 child: Onetextone(),
@@ -145,15 +166,19 @@ class _PageoneState extends State<Pageone> {
               SizedBox(height:10),
               BounceInRight(
                 duration: Duration(seconds:5),
-                child: Container(
-                  color:Color(0xffFBFBFB),
-                  height:120,
-                  child:ListView.builder(itemCount:hava.length,
-                  scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
-                    return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index],);
-                  },
-                  )
-                  
+                child: Showcase(
+                  key: _key2,
+                  description: 'You can check 24 hour weather for a one day',
+                  child: Container(
+                    color:Color(0xffFBFBFB),
+                    height:120,
+                    child:ListView.builder(itemCount:hava.length,
+                    scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
+                      return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index],);
+                    },
+                    )
+                    
+                  ),
                 ),
               ),
               SizedBox(height:10),

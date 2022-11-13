@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:weather_app/pages/pageone.dart';
 import 'package:weather_app/pages/pagetwo.dart';
 
@@ -19,7 +20,12 @@ class MyApp extends StatelessWidget {
         
         primarySwatch: Colors.blue,
       ),
-      home: const Pageone()
+      //home: const Pageone()
+      home:ShowCaseWidget(
+        builder: Builder(
+          builder: (context)=>Pageone()
+          )
+        )
     );
   }
 }
