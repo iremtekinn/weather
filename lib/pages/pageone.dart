@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 //import 'package:showcaseview/showcaseview.dart';
 import 'package:weather_app/widgets/appbarone.dart';
@@ -12,6 +13,8 @@ import 'package:weather_app/widgets/onetextone.dart';
 import 'package:weather_app/widgets/opinkk.dart';
 import 'package:weather_app/widgets/otexttwo.dart';
 
+import '../provider/weather_provider.dart';
+
 class Pageone extends StatefulWidget {
   const Pageone({super.key});
 
@@ -20,6 +23,22 @@ class Pageone extends StatefulWidget {
 }
 
 class _PageoneState extends State<Pageone> {
+  void initState(){
+    super.initState();
+  WidgetsBinding.instance.addPostFrameCallback(
+    (_) => ShowCaseWidget.of(context).startShowCase(
+      [
+        _key1,
+        _key2,
+        
+        
+      ],
+    ),
+  );
+   
+    final wetProvider=Provider.of<WeatherProvider>(context,listen:false);
+    wetProvider.getWeatherData(context);
+  }
   List<String>hava=[
      "assets/o1.png",
      "assets/o2.png",
@@ -123,19 +142,6 @@ class _PageoneState extends State<Pageone> {
   final _key1=GlobalKey();
   final _key2=GlobalKey();
 
-void initState() {
-  super.initState();
-  WidgetsBinding.instance!.addPostFrameCallback(
-    (_) => ShowCaseWidget.of(context)!.startShowCase(
-      [
-        _key1,
-        _key2,
-        
-        
-      ],
-    ),
-  );
-}
 
   
   @override

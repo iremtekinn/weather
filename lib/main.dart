@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:weather_app/pages/pageone.dart';
 import 'package:weather_app/pages/pagetwo.dart';
+import 'package:weather_app/provider/weather_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+ // runApp(MultiProvider(child: const MyApp()));,
+ runApp(MultiProvider(providers:[
+  ChangeNotifierProvider<WeatherProvider>(create:(_)=>WeatherProvider())
+ ],child:const MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,6 +17,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
+  
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
