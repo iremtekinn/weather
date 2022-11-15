@@ -23,6 +23,8 @@ class Pageone extends StatefulWidget {
 }
 
 class _PageoneState extends State<Pageone> {
+
+  WeatherProvider ?wetProvider;
   void initState(){
     super.initState();
   WidgetsBinding.instance.addPostFrameCallback(
@@ -36,8 +38,8 @@ class _PageoneState extends State<Pageone> {
     ),
   );
    
-    final wetProvider=Provider.of<WeatherProvider>(context,listen:false);
-    wetProvider.getWeatherData(context);
+     wetProvider=Provider.of<WeatherProvider>(context,listen:false);
+    wetProvider!.getWeatherData(context);
   }
   List<String>hava=[
      "assets/o1.png",
@@ -148,7 +150,12 @@ class _PageoneState extends State<Pageone> {
   Widget build(BuildContext context) {
     return Scaffold(
     
-      body:SingleChildScrollView(
+      body:
+      //Consumer(
+      //  builder: (context,WeatherProvider aa, child)=>aa.isLoading==true
+      // ?CircularProgressIndicator()
+       // :
+        SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(right:10, left:10),
           child:Column(
@@ -158,16 +165,32 @@ class _PageoneState extends State<Pageone> {
                 duration: Duration(seconds:5),
                 ),
               SizedBox(height: 20,),
-              Bounce(child: Showcase(
-                key: _key1,
-                description: 'You can check the weather in here',
-                child: Odurum()
-                )
-                ),
+              Consumer(
+                builder: (context, WeatherProvider aa, child) => aa.isLoading==true
+                ?CircularProgressIndicator()
+                :
+                Showcase(
+                  key: _key1,
+                  description: 'You can check the weather in here',
+                  child: Odurum(currentWeatherResponse: wetProvider!.response,)
+                  ),
+                
+              ),
               SizedBox(height:10),
-              BounceInLeft(
-                child: Onetextone(),
-                duration:Duration(seconds:5)
+              // BounceInLeft(
+              //   child: Onetextone(),
+              //   duration:Duration(seconds:5)
+              // ),
+              Consumer(
+                builder: (context, WeatherProvider aa, child) => aa.isLoading==true
+                ?CircularProgressIndicator()
+                :
+                 Container(
+                    width:double.infinity,
+                    height:25,
+                    color:Color(0xffFBFBFB),
+                    child:Text(aa.response.name.toString(),style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16))
+                  ),
               ),
               SizedBox(height:10),
               BounceInRight(
@@ -212,6 +235,7 @@ class _PageoneState extends State<Pageone> {
           )
           ),
       )
+       // )
     );
   }
 }

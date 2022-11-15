@@ -3,10 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:weather_app/models/current_weather_response.dart';
 import 'package:weather_app/pages/pagetwo.dart';
 
 class Odurum extends StatefulWidget {
-  const Odurum({super.key});
+  final CurrentWeatherResponse currentWeatherResponse;
+  const Odurum({super.key, required this.currentWeatherResponse});
 
   @override
   State<Odurum> createState() => _OdurumState();
@@ -37,7 +39,7 @@ class _OdurumState extends State<Odurum> {
           Positioned(
             top:20,
             left:22,
-            child: Text("Senin 20 Desember 2021",style:TextStyle(color:Colors.white)),
+            child: Text(widget.currentWeatherResponse.sys!.country.toString() +" 20 Desember 2021",style:TextStyle(color:Colors.white)),
             
             ),
             Positioned(
@@ -56,8 +58,9 @@ class _OdurumState extends State<Odurum> {
             child:Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("18° C",style:TextStyle(color:Colors.white, fontSize: 18)),
-                Text("Hujan Berawan",style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 18)),
+                Text(widget.currentWeatherResponse.main!.temp!.toInt(). toString(),style:TextStyle(color:Colors.white, fontSize: 18)),
+                Text(widget.currentWeatherResponse.name.toString(),
+                style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 18)),
      
               ],
             )
