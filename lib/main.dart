@@ -3,12 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:weather_app/pages/pageone.dart';
 import 'package:weather_app/pages/pagetwo.dart';
+import 'package:weather_app/provider/forecasting_provider.dart';
 import 'package:weather_app/provider/weather_provider.dart';
 
 void main() {
  // runApp(MultiProvider(child: const MyApp()));,
  runApp(MultiProvider(providers:[
-  ChangeNotifierProvider<WeatherProvider>(create:(_)=>WeatherProvider())
+  ChangeNotifierProvider<WeatherProvider>(create:(_)=>WeatherProvider()),
+  ChangeNotifierProvider<ForecastingProvider>(create:(_)=>ForecastingProvider())
  ],child:const MyApp(),));
 }
 

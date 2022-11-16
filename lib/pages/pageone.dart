@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:weather_app/provider/forecasting_provider.dart';
 //import 'package:showcaseview/showcaseview.dart';
 import 'package:weather_app/widgets/appbarone.dart';
 import 'package:weather_app/widgets/odurum.dart';
@@ -25,6 +26,7 @@ class Pageone extends StatefulWidget {
 class _PageoneState extends State<Pageone> {
 
   WeatherProvider ?wetProvider;
+  ForecastingProvider ?forecastingProvider;
   void initState(){
     super.initState();
   WidgetsBinding.instance.addPostFrameCallback(
@@ -40,6 +42,8 @@ class _PageoneState extends State<Pageone> {
    
      wetProvider=Provider.of<WeatherProvider>(context,listen:false);
     wetProvider!.getWeatherData(context);
+    forecastingProvider=Provider.of<ForecastingProvider>(context,listen:false);
+    forecastingProvider!.getForecastingData(context);
   }
   List<String>hava=[
      "assets/o1.png",
@@ -172,7 +176,7 @@ class _PageoneState extends State<Pageone> {
                 Showcase(
                   key: _key1,
                   description: 'You can check the weather in here',
-                  child: Odurum(currentWeatherResponse: wetProvider!.response,)
+                  child: Odurum(currentWeatherResponse: aa.response,)
                   ),
                 
               ),
@@ -195,18 +199,47 @@ class _PageoneState extends State<Pageone> {
               SizedBox(height:10),
               BounceInRight(
                 duration: Duration(seconds:5),
-                child: Showcase(
-                  key: _key2,
-                  description: 'You can check 24 hour weather for a one day',
-                  child: Container(
-                    color:Color(0xffFBFBFB),
-                    height:120,
-                    child:ListView.builder(itemCount:hava.length,
-                    scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
-                      return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index],);
-                    },
-                    )
-                    
+                child: Consumer(
+                  builder:(context,ForecastingProvider forecastProvider,child)=>forecastingProvider?.isLoading==true?
+                  CircularProgressIndicator():
+                  //child: 
+                  Showcase(
+                    key: _key2,
+                    description: 'You can check 24 hour weather for a one day',
+                    child: Container(
+                      color:Color(0xffFBFBFB),
+                      height:120,
+                      child:ListView.builder(
+                        itemCount:forecastProvider.response.list!.length,
+                      
+                      scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
+                        return Padding(padding: EdgeInsets.all(8),
+                         child:GestureDetector(
+                          onTap:() {
+                             //currentWeatherResponse: wetProvider!.response=forecastProvider.response.list![index].main!.temp;
+                    wetProvider!.response.main!.temp=forecastProvider.response.list![index].main!.temp;
+                    //wetProvider!.response.dt!=forecastProvider.response.list![index].dtTxt.toString().split(" ").last .toString() .substring(0,5);
+                         wetProvider!.notifyListeners();
+                          }, 
+                           child: Container(
+                            width:78,
+                            height:10,
+                            color:Colors.grey.shade100,
+                            child:Column(
+                              children: [
+                                Image.asset("assets/t1.png"),
+                                Text(forecastProvider.response.list![index].main!.temp!.toInt().toString(),style: TextStyle(fontWeight: FontWeight.bold),),
+                                Text(forecastProvider.response.list![index].dtTxt.toString().split(" ").last .toString() .substring(0,5), style:TextStyle(color:Colors.grey.shade700,fontSize: 11))
+                              ],
+                            )
+                            
+                           ),
+                         )
+                      );
+                      },
+                      )
+                      
+                    ),
                   ),
                 ),
               ),

@@ -45,7 +45,7 @@ class _OdurumState extends State<Odurum> {
             Positioned(
             top:20,
             right:22,
-            child: Text("3.30 PM",style:TextStyle(color:Colors.white))
+            child: Text("${DateTime.fromMillisecondsSinceEpoch(widget.currentWeatherResponse.dt!).hour}:${DateTime.fromMillisecondsSinceEpoch(widget.currentWeatherResponse.dt!).minute}",style:TextStyle(color:Colors.white))
             ),
             Positioned(
             top:55,
@@ -59,7 +59,7 @@ class _OdurumState extends State<Odurum> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.currentWeatherResponse.main!.temp!.toInt(). toString(),style:TextStyle(color:Colors.white, fontSize: 18)),
-                Text(widget.currentWeatherResponse.name.toString(),
+                Text(widget.currentWeatherResponse.weather![0].main .toString(),
                 style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 18)),
      
               ],
@@ -70,7 +70,7 @@ class _OdurumState extends State<Odurum> {
             left:22,
             child: Row(
               children: [
-              Text("Terakhir update 3.00 PM ",style:TextStyle(color:Colors.white,fontSize: 12)),
+              Text(widget.currentWeatherResponse.name.toString(),style:TextStyle(color:Colors.white,fontSize: 12)),
               Image.asset("assets/refreshocycle.png")
               ],
               )
