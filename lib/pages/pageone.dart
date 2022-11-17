@@ -219,7 +219,8 @@ class _PageoneState extends State<Pageone> {
                              //currentWeatherResponse: wetProvider!.response=forecastProvider.response.list![index].main!.temp;
                     wetProvider!.response.main!.temp=forecastProvider.response.list![index].main!.temp;
                     //wetProvider!.response.dt!=forecastProvider.response.list![index].dtTxt.toString().split(" ").last .toString() .substring(0,5);
-                         wetProvider!.notifyListeners();
+                        // wetProvider!.notifyListeners();
+                        forecastProvider.setCurrentIndex(index);
                           }, 
                            child: Container(
                             width:78,
