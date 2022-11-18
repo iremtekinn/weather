@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/widgets/olistone.dart';
 import 'package:weather_app/widgets/onetextone.dart';
 import 'package:weather_app/widgets/tdurum.dart';
@@ -9,6 +10,9 @@ import 'package:weather_app/widgets/tgrid.dart';
 import 'package:weather_app/widgets/tinformasi.dart';
 import 'package:weather_app/widgets/tinformasi2.dart';
 import 'package:weather_app/widgets/twotextone.dart';
+
+import '../provider/forecasting_provider.dart';
+import '../provider/weather_provider.dart';
 
 class Pagetwo extends StatefulWidget {
   const Pagetwo({super.key});
@@ -18,6 +22,16 @@ class Pagetwo extends StatefulWidget {
 }
 
 class _PagetwoState extends State<Pagetwo> {
+
+   WeatherProvider ?wetProvider;
+  ForecastingProvider ?forecastingProvider;
+  void initState(){
+     super.initState();
+     wetProvider=Provider.of<WeatherProvider>(context,listen:false);
+    wetProvider!.getWeatherData(context);
+    forecastingProvider=Provider.of<ForecastingProvider>(context,listen:false);
+    forecastingProvider!.getForecastingData(context);
+  }
   List<String>hava=[
      "assets/o1.png",
      "assets/o2.png",
@@ -124,28 +138,72 @@ class _PagetwoState extends State<Pagetwo> {
         
         child:Column(
           children: [
-            FadeIn(child: Tdurum(),duration: Duration(seconds: 5),),
+            Consumer(builder: (context, WeatherProvider aa, child) => aa.isLoading==true
+                ?CircularProgressIndicator()
+                :
+             // child:
+               Tdurum(currentWeatherResponse: aa.response,)),
             SizedBox(height:20),
-            FadeIn(
-              duration: Duration(seconds: 5),
-              child: Padding(
-                padding: EdgeInsets.only(left:10),
-                child: Onetextone()
-                ),
-            ),
+             Consumer(
+                builder: (context, WeatherProvider aa, child) => aa.isLoading==true
+                ?CircularProgressIndicator()
+                :
+                 Container(
+                    width:double.infinity,
+                    height:25,
+                    color:Color(0xffFBFBFB),
+                    child:Text(aa.response.name.toString(),style:TextStyle(fontWeight: FontWeight.w500,fontSize: 16))
+                  ),
+              ),
             SizedBox(height:10),
-            FadeInRight(
-              duration: Duration(seconds: 5),
-              child: Container(
-                  color:Color(0xffFBFBFB),
-                  height:120,
-                  child:ListView.builder(itemCount:hava.length,
-                  scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
-                    return Olistone(imgUrl: hava[index], text1: text1[index], text2: text2[index]);
-                  },
-                  )
+             BounceInRight(
+                duration: Duration(seconds:5),
+                child: Consumer(
+                  builder:(context,ForecastingProvider forecastProvider,child)=>forecastingProvider?.isLoading==true?
+                  CircularProgressIndicator():
+                  //child: 
+                  
+                   
+                    Container(
+                      color:Color(0xffFBFBFB),
+                      height:130,
+                      child:ListView.builder(
+                        itemCount:forecastProvider.response.list!.length,
+                      
+                      scrollDirection: Axis.horizontal, itemBuilder: (context, index) {
+                        return Padding(padding: EdgeInsets.all(8),
+                         child:GestureDetector(
+                          onTap:() {
+                             //currentWeatherResponse: wetProvider!.response=forecastProvider.response.list![index].main!.temp;
+                    wetProvider!.response.main!.temp=forecastProvider.response.list![index].main!.temp;
+                    //wetProvider!.response.dt!=forecastProvider.response.list![index].dtTxt.toString().split(" ").last .toString() .substring(0,5);
+                        // wetProvider!.notifyListeners();
+                        forecastProvider.setCurrentIndex(index);
+                          }, 
+                           child: Container(
+                            width:78,
+                            //height:25,
+                            color:Colors.grey.shade50,
+                            child:Column(
+                              children: [
+                               // Image.asset("assets/t1.png"),
+                               Image.network("http://openweathermap.org/img/wn/${forecastProvider.response.list![index].weather?.first.icon ?? "10d"}@2x.png"),//indexin resimleri değişti ve
+                               // yukardaki kod satırı sayesinde pageone a ait listviewdeki indexlere tıkladığımızda tıkladığımız indexe ait hava durumunun görseli oduurm kartında gözüküyor.
+                                Text(forecastProvider.response.list![index].main!.temp!.toInt().toString(),style: TextStyle(fontWeight: FontWeight.bold),),
+                                Text(forecastProvider.response.list![index].dtTxt.toString().split(" ").last .toString() .substring(0,5), style:TextStyle(color:Colors.grey.shade700,fontSize: 11))
+                              ],
+                            )
+                            
+                           ),
+                         )
+                      );
+                      },
+                      )
+                      
+                    ),
+                  
                 ),
-            ),
+              ),
               SizedBox(height:10),
               FadeIn(duration: Duration(seconds: 5),child: Twotextone()),
               SizedBox(height:10),

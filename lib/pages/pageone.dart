@@ -208,7 +208,7 @@ class _PageoneState extends State<Pageone> {
                     description: 'You can check 24 hour weather for a one day',
                     child: Container(
                       color:Color(0xffFBFBFB),
-                      height:120,
+                      height:130,
                       child:ListView.builder(
                         itemCount:forecastProvider.response.list!.length,
                       
@@ -224,11 +224,13 @@ class _PageoneState extends State<Pageone> {
                           }, 
                            child: Container(
                             width:78,
-                            height:10,
-                            color:Colors.grey.shade100,
+                            //height:25,
+                            color:Colors.grey.shade50,
                             child:Column(
                               children: [
-                                Image.asset("assets/t1.png"),
+                               // Image.asset("assets/t1.png"),
+                               Image.network("http://openweathermap.org/img/wn/${forecastProvider.response.list![index].weather?.first.icon ?? "10d"}@2x.png"),//indexin resimleri değişti ve
+                               // yukardaki kod satırı sayesinde pageone a ait listviewdeki indexlere tıkladığımızda tıkladığımız indexe ait hava durumunun görseli oduurm kartında gözüküyor.
                                 Text(forecastProvider.response.list![index].main!.temp!.toInt().toString(),style: TextStyle(fontWeight: FontWeight.bold),),
                                 Text(forecastProvider.response.list![index].dtTxt.toString().split(" ").last .toString() .substring(0,5), style:TextStyle(color:Colors.grey.shade700,fontSize: 11))
                               ],

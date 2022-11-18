@@ -8,6 +8,7 @@ import 'package:weather_app/models/current_weather_response.dart';
 
 
 import 'package:weather_app/models/weather_forecast_response.dart';
+import 'package:weather_app/services/logging.dart';
 
 
 Future<CurrentWeatherResponse?>getCurrentData(context)async{
@@ -25,20 +26,38 @@ Future<CurrentWeatherResponse?>getCurrentData(context)async{
   }
 
 }
-Future<WeatherForecastResponse?>getCurrentData2() async{
-  WeatherForecastResponse forecastingResponse;
-  try{
-    //dio ile veri çektik
-    // final response=await http.get(Uri.parse(
-    //   "https://api.openweathermap.org/data/2.5/forecast?lat=41.029098&lon=29.017084&appid=d98d3a79d3c8761669dae0e2038071ca&units=metric"));
-   // final response =await Dio().get("https://api.openweathermap.org/data/2.5/forecast?lat=41.029098&lon=29.017084&appid=d98d3a79d3c8761669dae0e2038071ca&units=metric"),
-     final response = await Dio().get('https://api.openweathermap.org/data/2.5/forecast', queryParameters: {'lat': 41.029098, 'lon': 29.017084,'appid':'d98d3a79d3c8761669dae0e2038071ca','units':'metric'});
-      forecastingResponse=WeatherForecastResponse.fromJson((response.data));
-      print(forecastingResponse.city!.country);
-      return forecastingResponse;
+// Future<WeatherForecastResponse?>getCurrentData2() async{
+//   WeatherForecastResponse forecastingResponse;
+//   try{
+//     //dio ile veri çektik
+//     // final response=await http.get(Uri.parse(
+//     //   "https://api.openweathermap.org/data/2.5/forecast?lat=41.029098&lon=29.017084&appid=d98d3a79d3c8761669dae0e2038071ca&units=metric"));
+//    // final response =await Dio().get("https://api.openweathermap.org/data/2.5/forecast?lat=41.029098&lon=29.017084&appid=d98d3a79d3c8761669dae0e2038071ca&units=metric"),
+//      final response = await Dio().get('https://api.openweathermap.org/data/2.5/forecast', queryParameters: {'lat': 41.029098, 'lon': 29.017084,'appid':'d98d3a79d3c8761669dae0e2038071ca','units':'metric'});
+//       forecastingResponse=WeatherForecastResponse.fromJson((response.data));
+//       print(forecastingResponse.city!.country);
+//       return forecastingResponse;
     
+//   }
+//   catch(e){
+//     log(e.toString());
+//   }
+//   }
+final Dio _dio=Dio(BaseOptions(
+  baseUrl:"https://api.openweathermap.org/data/2.5/",
+  connectTimeout:5000,
+  receiveTimeout:3000))
+  ..interceptors.add(Logging());
+  Future<WeatherForecastResponse?>getCurrentData2()async{
+    WeatherForecastResponse forecastingResponse;
+    try{
+      final response =await _dio.get("forecast?lat=41.029098&lon=29.017084&appid=d98d3a79d3c8761669dae0e2038071ca&units=metric");
+      forecastingResponse=WeatherForecastResponse.fromJson(response.data);
+      print(forecastingResponse.city!.sunrise);
+      return forecastingResponse;
+    }
+    catch(e){
+      log(e.toString());
+    }
   }
-  catch(e){
-    log(e.toString());
-  }
-  }
+
