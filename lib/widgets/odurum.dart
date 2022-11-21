@@ -52,7 +52,7 @@ class _OdurumState extends State<Odurum> {
               top:20,
               right:22,
               //child: Text("${DateTime.fromMillisecondsSinceEpoch(widget.currentWeatherResponse.dt!).hour}:${DateTime.fromMillisecondsSinceEpoch(widget.currentWeatherResponse.dt!).minute}",style:TextStyle(color:Colors.white))
-              child:Text("${value.response.list![value.currentIndex].dtTxt.toString().split(" ").last.toString().substring(0,5).toString()}")
+              child:Text("${value.response.list![value.currentIndex].dtTxt.toString().split(" ").last.toString().substring(0,5).toString()}",style: TextStyle(color: Colors.white),)
               ),
               Positioned(
               top:55,

@@ -60,11 +60,13 @@ class _TdurumState extends State<Tdurum> {
                 left:83,
                 child: Column(
                   children: [
-                    Text(widget.currentWeatherResponse.name.toString()+"${value.response.list![value.currentIndex].dtTxt.toString().split(" ").last.toString().substring(0,5).toString()}"+" ${value.response.list![value.currentIndex].dtTxt.toString().split(" ").first.toString().substring(0,10).toString()}",style: TextStyle(color:Colors.white),),
+                    Text(widget.currentWeatherResponse.name.toString()+"   ${value.response.list![value.currentIndex].dtTxt.toString().split(" ").last.toString().substring(0,5).toString()}"+"     ${value.response.list![value.currentIndex].dtTxt.toString().split(" ").first.toString().substring(0,10).toString()}",style: TextStyle(color:Colors.white),),
                     SizedBox(height:20),
                     Image.network("http://openweathermap.org/img/wn/${value.response.list![value.currentIndex].weather?.first.icon ?? "10d"}@2x.png"),
                     //SizedBox(height:10),
-                    Text(widget.currentWeatherResponse.main!.temp!.toInt(). toString(),style: TextStyle(color:Colors.white,fontSize:17),),
+                   // Text(widget.currentWeatherResponse.main!.temp!.toInt(). toString(),style: TextStyle(color:Colors.white,fontSize:17),), 
+                   Text("${value.response.list![value.currentIndex].main!.temp.toInt().toString()}",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:17)), 
+                    //yukardaki kod satırı sayesinde pageonedaki kartta yazan hava sıcaklığı ile pagetwo daki kartta yazan sıcaklık birbirine eşitlendi
                     SizedBox(height:10),
                     Text("${value.response.list![value.currentIndex].weather![0].description!}",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:17)),
                     SizedBox(height:10),
